@@ -99,13 +99,13 @@ const Home = () => {
           </Text>
           <br />
           <Text as={"span"} color={"green.400"}>
-            FitPunks!!
+            FitPunk!
           </Text>
         </Heading>
         <Text color={"gray.500"}>Fitpunks is the future of excercise</Text>
         <Text color={"green.500"}>
           All the Fitpunks are generated as a consequence of your training and
-          dedication to your well being
+          dedication to your well-being.
         </Text>
         <Stack
           spacing={{ base: 4, sm: 6 }}
@@ -126,7 +126,7 @@ const Home = () => {
           </Button>
           <Link to="/punks">
             <Button rounded={"full"} size={"lg"} fontWeight={"normal"} px={6}>
-              Galería
+              Gallery
             </Button>
           </Link>
         </Stack>
@@ -161,8 +161,7 @@ const Home = () => {
               mt={4}
               size="xs"
               colorScheme="green"
-            >
-              Actualizar
+            >Update
             </Button>
           </>
         ) : (
