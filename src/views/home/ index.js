@@ -23,6 +23,8 @@ const Home = () => {
   const getFitPunksData = useCallback(async () => {
     if (fitPunks) {
       const totalSupply = await fitPunks.methods.totalSupply().call();
+      console.log("SUPPLY")
+      console.log(totalSupply)
       const dnaPreview = await fitPunks.methods
         .deterministicPseudoRandom(totalSupply, account)
         .call();

@@ -28,8 +28,8 @@ import {
             align={{ base: "center", md: "center" }}
           >
             <Text>
-              © {new Date().getFullYear()} Original designs by
-              <Link ml={1} href="https://twitter.com/pablostanley">
+              © {new Date().getFullYear()} Nicolas Diaz
+              <Link ml={1} href="https://www.linkedin.com/in/nicolasdiaz27/">
                 Pablo Stanley 🎨
               </Link>
             </Text>
