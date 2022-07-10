@@ -28,9 +28,9 @@ import {
             align={{ base: "center", md: "center" }}
           >
             <Text>
-              © {new Date().getFullYear()} Nicolas Diaz
+              © {new Date().getFullYear()} Nicolas Diaz 🧑🏻‍💻
               <Link ml={1} href="https://www.linkedin.com/in/nicolasdiaz27/">
-                Pablo Stanley 🎨
+                LinkedIn 🎨
               </Link>
             </Text>
           </Container>

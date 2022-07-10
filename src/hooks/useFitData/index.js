@@ -1,7 +1,51 @@
 import { useCallback, useEffect, useState } from "react";
 import useFitPunks from "../usePunk/index";
 
+// Plural
+const useFitPunkData = () => {
+  const [punks, setPunks] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const fitPunk = useFitPunks();
+  console.log("DATA")
+  console.log(fitPunk)
+  const update = useCallback(async () => {
+    if (fitPunk) {
+      setLoading(true);
+      console.log("fitPunk");
+      console.log(fitPunk);
+      let tokenIds;
+      const totalSupply = await fitPunk.methods.totalSupply().call();
+      console.log("SUPPLY")
+      console.log(totalSupply)
+      //AArray IDS
+      tokenIds = new Array(Number(totalSupply)).fill().map((_, index) => index);
+      console.log("id")
+      console.log(tokenIds)
+      const punksPromise = tokenIds.map(tokenId =>
+        getPunkData({ tokenId, fitPunk })
+      );
+
+      const punks = await Promise.all(punksPromise);
+      console.log("PUNKS")
+      console.log(punks)
+      setPunks(punks);
+      setLoading(false);
+    }
+  }, [fitPunk]);
+
+  useEffect(() => {
+    update();
+  }, [update]);
+
+  return {
+    loading,
+    punks,
+    update,
+  };
+};
 const getPunkData = async ({ tokenId, fitPunk }) => {
+  console.log("popo")
+  console.log(fitPunk)
   const [
     tokenURI,
     dna,
@@ -21,8 +65,8 @@ const getPunkData = async ({ tokenId, fitPunk }) => {
     topType,
   ] = await Promise.all([
     fitPunk.methods.tokenURI(tokenId).call(),
-        fitPunk.methods.tokenDNA(tokenId).call(),
-    fitPunk.methods.ownerOf(fitPunk).call(),
+    fitPunk.methods.tokenDNA(tokenId).call(),
+    fitPunk.methods.ownerOf(tokenId).call(),
     fitPunk.methods.getAccessoriesType(tokenId).call(),
     fitPunk.methods.getAccessoriesType(tokenId).call(),
     fitPunk.methods.getClotheColor(tokenId).call(),
@@ -39,6 +83,8 @@ const getPunkData = async ({ tokenId, fitPunk }) => {
     fitPunk.methods.getTopType(tokenId).call(),
   ]);
 
+  console.log("Is this the error?")
+  console.log(tokenURI)
   const responseMetadata = await fetch(tokenURI);
   const metadata = await responseMetadata.json();
 
@@ -66,40 +112,6 @@ const getPunkData = async ({ tokenId, fitPunk }) => {
   };
 };
 
-// Plural
-const useFitPunkData = () => {
-  const [punks, setPunks] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const punksData = useFitPunks();
-
-  const update = useCallback(async () => {
-    if (punksData) {
-      setLoading(true);
-      console.log("CONTRACT");
-      console.log(punksData);
-      let tokenIds;
-      const totalSupply = await punksData.methods.totalSupply().call();
-      tokenIds = new Array(Number(totalSupply)).fill().map((_, index) => index);
-      const punksPromise = tokenIds.map(tokenId =>
-        getPunkData({ tokenId, punksData })
-      );
-
-      const punks = await Promise.all(punksPromise);
-      setPunks(punks);
-      setLoading(false);
-    }
-  }, [punksData]);
-
-  useEffect(() => {
-    update();
-  }, [update]);
-
-  return {
-    loading,
-    punks,
-    update,
-  };
-};
 
 // Singular
 // const usePlatziPunkData = () => {

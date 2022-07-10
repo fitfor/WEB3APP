@@ -1,6 +1,10 @@
 const fitPunksArtifact = {
+  //Connection with the deployed smart contract
   address: {
-    4: "0x9ef00bde542c6c32ce471bc5489609b0bc837c67",
+    //Working 
+    // 4: "0x9ef00bde542c6c32ce471bc5489609b0bc837c67",
+    // 4: "0xf273F0B2CC58d4d3A379c84aa10B4A438AA19d5E",
+    4: "0x93fF327175bf5A5a89B60a8Dd61132A5979330D5",
   },
   abi: [
     {
